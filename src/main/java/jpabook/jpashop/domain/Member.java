@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Member {
+public class Member extends BaseEntity{
 
     @Id @GeneratedValue // GeneratedValue에 아무것도 안주면 auto
     @Column(name = "MEMBER_ID") // 테이블 설계 상 컬럼명이 멤버아이디임

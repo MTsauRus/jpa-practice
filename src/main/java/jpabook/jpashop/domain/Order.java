@@ -8,11 +8,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "ORDERS") // DB에 ORDER가 예약어로 잡혀있는 경우가 있음. 이를 피하기 위해 ORDERS로 함
-public class Order {
+public class Order extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "ORDER_ID")
     private Long id;
+
+    @OneToOne // delivery와 1대1. 얘가 주인.
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
 
     @ManyToOne // 연관관계의 주인. Order의 orders에 mappedBy"member" 해야 한다.
     @JoinColumn(name = "MEMBER_ID") // 연관관계를 맺고 있는 엔티티의 PK를 해당 테이블의 외래키 "MEMBER_ID"로 저장.
