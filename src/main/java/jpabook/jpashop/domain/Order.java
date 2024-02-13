@@ -14,15 +14,15 @@ public class Order extends BaseEntity{
     @Column(name = "ORDER_ID")
     private Long id;
 
-    @OneToOne // delivery와 1대1. 얘가 주인.
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // delivery와 1대1. 얘가 주인. Order 생성할 때 delivery 같이 생성
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
-    @ManyToOne // 연관관계의 주인. Order의 orders에 mappedBy"member" 해야 한다.
+    @ManyToOne(fetch = FetchType.LAZY) // 연관관계의 주인. Order의 orders에 mappedBy"member" 해야 한다.
     @JoinColumn(name = "MEMBER_ID") // 연관관계를 맺고 있는 엔티티의 PK를 해당 테이블의 외래키 "MEMBER_ID"로 저장.
     private Member member;
 
-    @OneToMany(mappedBy = "order") // 연관관계의 주인은 orderItem의 order. 외래 키를 orderItem이 가지고 있음.
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // 연관관계의 주인은 orderItem의 order. 외래 키를 orderItem이 가지고 있음.
     private List<OrderItem> orderItems = new ArrayList<>();
 
     public void addOrderItem(OrderItem orderItem) { // 연관관계 편의 메소드. 무한 루프 등의 문제 방지를 위해 한쪽에만 만들자.

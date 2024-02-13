@@ -9,7 +9,7 @@ public class OrderItem extends BaseEntity{
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
-    @ManyToOne // order 간의 연관관계 주인
+    @ManyToOne(fetch = FetchType.LAZY) // order 간의 연관관계 주인
     @JoinColumn(name = "ORDER_ID")
     private Order order;
 
